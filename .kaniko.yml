@@ -1,0 +1,29 @@
+## Build docker Images in Kaniko with GitLab CI
+# This snippet builds docker images with Kaniko in a very default GitLab environment
+# CI_REGISTRY_USER, CI_REGISTRY and CI_REGISTRY_PASSWORD are predefined in GitLab
+
+variables:
+  IMAGE_TAG: "latest"
+  KANIKO_CONTEXT: "${CI_PROJECT_DIR}"
+
+.kaniko:
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    - mkdir -p /kaniko/.dockerse
+    - |-
+      cat >${DOCKER_CONFIG}/config.json <<EOF
+      {
+        "auths": {
+          "${CI_REGISTRY}": {
+            "username":"$CI_REGISTRY_USER",
+            "password":"$CI_REGISTRY_PASSWORD"
+          }
+        }
+      }
+      EOF
+  script:
+    - /kaniko/executor
+      --context ${KANIKO_CONTEXT}
+      --destination $CI_REGISTRY_IMAGE:${IMAGE_TAG}
