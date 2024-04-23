@@ -30,6 +30,6 @@ variables:
       --dockerfile ${DOCKERFILE}
       --context ${KANIKO_CONTEXT}
       --destination $DESTINATION
-      --snapshotMode=redo
+      --snapshot-mode=redo
       --cache=true
       --use-new-run
