@@ -7,6 +7,8 @@ variables:
   KANIKO_CONTEXT: "${CI_PROJECT_DIR}"
   DESTINATION: "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}"
   DOCKERFILE: Dockerfile
+  PRELOAD: false
+  PRELOAD_IMAGE: ""
 
 .kaniko:
   image:
@@ -26,10 +28,14 @@ variables:
       }
       EOF
   script:
+    - |
+      if [ "$PRELOAD" == "true" ]; then
+         /kaniko/warmer -f --image=$PRELOAD_IMAGE
+      fi
     - /kaniko/executor
       --dockerfile ${DOCKERFILE}
       --context ${KANIKO_CONTEXT}
       --destination $DESTINATION
-      --snapshot-mode=redo
+      --snapshotMode=redo
       --cache=true
       --use-new-run
