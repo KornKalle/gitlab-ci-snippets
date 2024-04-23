@@ -27,5 +27,6 @@ variables:
       EOF
   script:
     - /kaniko/executor
+      --dockerfile ${DOCKERFILE}
       --context ${KANIKO_CONTEXT}
       --destination $DESTINATION
