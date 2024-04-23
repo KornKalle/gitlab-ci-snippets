@@ -7,7 +7,7 @@ variables:
   KANIKO_CONTEXT: "${CI_PROJECT_DIR}"
   DESTINATION: "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}"
   DOCKERFILE: Dockerfile
-  PRELOAD: false
+  PRELOAD: "false"
   PRELOAD_IMAGE: ""
 
 .kaniko:
