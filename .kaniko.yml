@@ -5,6 +5,7 @@
 variables:
   IMAGE_TAG: "latest"
   KANIKO_CONTEXT: "${CI_PROJECT_DIR}"
+  DESTINATION: "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}"
 
 .kaniko:
   image:
@@ -26,4 +27,4 @@ variables:
   script:
     - /kaniko/executor
       --context ${KANIKO_CONTEXT}
-      --destination $CI_REGISTRY_IMAGE:${IMAGE_TAG}
+      --destination $DESTINATION
