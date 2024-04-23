@@ -6,6 +6,7 @@ variables:
   IMAGE_TAG: "latest"
   KANIKO_CONTEXT: "${CI_PROJECT_DIR}"
   DESTINATION: "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}"
+  DOCKERFILE: Dockerfile
 
 .kaniko:
   image:
