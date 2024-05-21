@@ -9,6 +9,7 @@ variables:
   DOCKERFILE: Dockerfile
   PRELOAD: "false"
   PRELOAD_IMAGE: ""
+  CACHE: "false"
 
 .kaniko:
   image:
@@ -37,5 +38,5 @@ variables:
       --context ${KANIKO_CONTEXT}
       --destination $DESTINATION
       --snapshotMode=redo
-      --cache=false
+      --cache=$CACHE
       --use-new-run
