@@ -37,5 +37,5 @@ variables:
       --context ${KANIKO_CONTEXT}
       --destination $DESTINATION
       --snapshotMode=redo
-      --cache=true
+      --cache=false
       --use-new-run
